@@ -1,24 +1,27 @@
+// swift-tools-version:5.1
 import PackageDescription
 
-
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
 let package = Package(
   name: "JWT",
-  dependencies: [
-    .Package(url: "https://github.com/kylef-archive/CommonCrypto.git", majorVersion: 1),
+  platforms: [
+    .iOS(.v12),
+    .tvOS(.v12),
+    .watchOS(.v6)
   ],
-  exclude: [
-    "Sources/JWT/HMACCryptoSwift.swift",
-  ]
-)
-#else
-let package = Package(
-  name: "JWT",
-  dependencies: [
-    .Package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", majorVersion: 0, minor: 8),
+  products: [
+    // Products define the executables and libraries a package produces, and make them visible to other packages.
+    .library(
+      name: "JWT",
+      targets: ["JWT"])
   ],
-  exclude: [
-    "Sources/JWT/HMACCommonCrypto.swift",
-  ]
+  dependencies: [],
+  targets: [
+    .target(
+      name: "JWT",
+      dependencies: [],
+      path: "Sources/JWT",
+      exclude: ["HMACCryptoSwift.swift"]
+    )
+  ],
+  swiftLanguageVersions: [.v5]
 )
-#endif
