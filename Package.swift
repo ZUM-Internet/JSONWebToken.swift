@@ -4,8 +4,8 @@ import PackageDescription
 let package = Package(
   name: "JWT",
   platforms: [
-    .iOS(.v12),
-    .tvOS(.v12),
+    .iOS(.v9),
+    .tvOS(.v9),
     .watchOS(.v6)
   ],
   products: [
